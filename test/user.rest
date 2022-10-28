@@ -5,6 +5,23 @@ POST http://0.0.0.0:4245/user/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "username" : "lluth",
+    "username" : "LLann",
     "password" : "password"
+}
+
+###
+GET http://0.0.0.0:4245/user/get HTTP/1.1
+Content-Type: application/json
+
+{
+    "username" : "Anndenn"
+}
+
+###
+POST http://0.0.0.0:4245/user/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "username" : "lluth",
+    "name" : "Luthfi Ann"
 }
