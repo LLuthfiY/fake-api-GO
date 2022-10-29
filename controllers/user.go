@@ -109,6 +109,5 @@ func DeleteUser(ctx *gin.Context) {
 		return
 	}
 	db.Delete(&user)
-
 	ctx.JSON(http.StatusOK, gin.H{"data": &user})
 }
