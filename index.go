@@ -8,5 +8,6 @@ import (
 func main() {
 	r := gin.Default()
 	routes.User(r)
+	routes.Article(r)
 	r.Run(":4245")
 }

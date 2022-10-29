@@ -8,7 +8,7 @@ import (
 
 func ConnectDB() *gorm.DB {
 	db, err := gorm.Open(sqlite.Open("db.db"), &gorm.Config{})
-	db.AutoMigrate(&models.User{})
+	db.AutoMigrate(&models.User{}, &models.Article{})
 	if err != nil {
 		panic("can't open sqlite")
 	}
@@ -18,7 +18,7 @@ func ConnectDB() *gorm.DB {
 func DisconnectDB(db *gorm.DB) {
 	dbSQL, err := db.DB()
 	if err != nil {
-		panic("cannot close sqlite")
+		panic("can't close sqlite")
 	}
 	dbSQL.Close()
 }

@@ -6,11 +6,12 @@ import (
 )
 
 type User struct {
-	Id        string `gorm:"uniqueIndex"`
+	ID        string `gorm:"primaryKey"`
 	Name      sql.NullString
 	Username  string `gorm:"uniqueIndex"`
 	Password  string
-	CreatedAt time.Time
+	Article   []Article `gorm:"foreignKey:UserId"`
+	CreatedAt *time.Time
 	UpdatedAt sql.NullTime
 	DeletedAt sql.NullTime
 }

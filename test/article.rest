@@ -1,0 +1,29 @@
+GET http://0.0.0.0:4245/article HTTP/1.1
+
+###
+POST http://0.0.0.0:4245/article HTTP/1.1
+Content-Type: application/jsom
+
+{
+    "userId" : "978d0c87-2267-4fb2-92fa-23c183b86b78",
+    "title" : "title",
+    "content" : "content"
+}
+
+###
+GET http://0.0.0.0:4245/article/get HTTP/1.1
+Content-Type: application/json
+
+{
+    "id" : "34b78338-3c98-4757-99c9-3cadc6877718"
+}
+
+###
+POST http://0.0.0.0:4245/article/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "id" : "34b78338-3c98-4757-99c9-3cadc6877718",
+    "title" : "New Title",
+    "content" : "New Content"
+}

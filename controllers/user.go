@@ -30,7 +30,7 @@ type userCreateRequest struct {
 
 func GetAllUser(ctx *gin.Context) {
 	var users []models.User
-	result := db.Find(&users)
+	result := db.Preload("Article").Find(&users)
 	if result.Error != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{"errors": result.Error})
 		return
@@ -47,7 +47,7 @@ func CreateUser(ctx *gin.Context) {
 	}
 	newUUID := uuid.New()
 	userModels := models.User{}
-	userModels.Id = newUUID.String()
+	userModels.ID = newUUID.String()
 	userModels.Username = data.Username
 	userModels.Password = data.Password
 	user := db.Create(&userModels)
@@ -67,7 +67,7 @@ func GetOneUser(ctx *gin.Context) {
 	}
 	var user = models.User{}
 	user.Username = data.Username
-	result := db.Model(&user).Take(&user, "username = ?", &data.Username)
+	result := db.Model(&user).Preload("Article").Take(&user, "username = ?", &data.Username)
 	if result.Error != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"errors": result.Error})
 		return
