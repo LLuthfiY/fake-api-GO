@@ -59,15 +59,10 @@ func CreateUser(ctx *gin.Context) {
 }
 
 func GetOneUser(ctx *gin.Context) {
-	var data userGetUsername
-	err := ctx.ShouldBindJSON(&data)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"errors": err.Error()})
-		return
-	}
+	username := ctx.Param("username")
 	var user = models.User{}
-	user.Username = data.Username
-	result := db.Model(&user).Preload("Article").Take(&user, "username = ?", &data.Username)
+	user.Username = username
+	result := db.Model(&user).Preload("Article").Take(&user, "username = ?", username)
 	if result.Error != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"errors": result.Error})
 		return

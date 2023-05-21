@@ -9,7 +9,7 @@ func Article(router *gin.Engine) {
 	articleRoute := router.Group("/article")
 
 	articleRoute.GET("/", controllers.GetAllArticle)
-	articleRoute.GET("/get", controllers.GetArticle)
+	articleRoute.GET("/:id", controllers.GetArticle)
 	articleRoute.POST("/", controllers.CreateArticle)
 	articleRoute.POST("/update", controllers.UpdateArticle)
 	articleRoute.DELETE("/delete", controllers.DeleteArticle)

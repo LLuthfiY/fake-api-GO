@@ -8,7 +8,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type getArticleRequest struct {
+type getArticle struct {
 	ID string `json:"id"`
 }
 
@@ -41,14 +41,9 @@ func GetAllArticle(ctx *gin.Context) {
 }
 
 func GetArticle(ctx *gin.Context) {
-	var data getArticleRequest
-	err := ctx.ShouldBindJSON(&data)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"errors": err.Error()})
-		return
-	}
+	id := ctx.Param("id")
 	var article models.Article
-	result := db.Model(&article).Preload("User").Take(&article, "id = ?", &data.ID)
+	result := db.Model(&article).Preload("User").Take(&article, "id = ?", id)
 	if result.Error != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"errors": result.Error})
 		return
@@ -112,7 +107,7 @@ func UpdateArticle(ctx *gin.Context) {
 }
 
 func DeleteArticle(ctx *gin.Context) {
-	var data getArticleRequest
+	var data getArticle
 	err := ctx.ShouldBindJSON(&data)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"errors": err.Error()})
